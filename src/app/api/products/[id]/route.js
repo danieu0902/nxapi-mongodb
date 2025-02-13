@@ -1,14 +1,18 @@
 import { connectToDatabase } from "@/lib/mongodb";
 import { ObjectId } from "mongodb"; 
 
+export async function OPTIONS() {
+    return new Response(null, { status: 204 });
+}
+
 export async function GET(request, { params }) {
     const { database } = await connectToDatabase();
     const collection = database.collection(process.env.MONGODB_COLLECTION);
 
-    const { id } = await params
-    const results = await collection.find({ _id: new ObjectId(id) }).toArray()
+    const { id } = await params;
+    const results = await collection.find({ _id: new ObjectId(id) }).toArray();
 
-    return Response.json(results);
+    return new Response(JSON.stringify(results[0]));
 }
 
 
@@ -22,8 +26,8 @@ export async function PUT(request, { params }) {
     const collection = database.collection(process.env.MONGODB_COLLECTION);
 
     const { id } = await params
-    const { nombre, edad } = await request.json() // Read body request
-    const results = await collection.updateOne({ _id: new ObjectId(id) }, { $set: { nombre, edad } });
+    const { nombre, precio } = await request.json() // Read body request
+    const results = await collection.updateOne({ _id: new ObjectId(id) }, { $set: { nombre, precio } });
 
     return Response.json(results);
 }

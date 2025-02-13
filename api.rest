@@ -10,17 +10,25 @@ content-type: application/json
 
 ### 
 
-POST http://localhost:3000/api/users HTTP/1.1
-content-type: application/json
+# POST http://localhost:3000/api/users HTTP/1.1
+# content-type: application/json
 
-{ 
-    "nombre": "Eugenio", 
-    "edad": 21 
-}
+# { 
+#     "nombre": "Eugenio", 
+#     "edad": 21 
+# }
 
 ### 
 
-GET http://localhost:3000/api/users HTTP/1.1
+POST http://localhost:3000/api/products HTTP/1.1
+content-type: application/json
+
+ { 
+     "nombre": "auriculares inalámbricos", 
+     "precio": 15 
+ }
+
+GET http://localhost:3000/api/products HTTP/1.1
 content-type: application/json
 
 ###
