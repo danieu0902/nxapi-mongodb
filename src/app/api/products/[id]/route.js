@@ -9,8 +9,7 @@ export async function GET(request, { params }) {
     const { database } = await connectToDatabase();
     const collection = database.collection(process.env.MONGODB_COLLECTION);
 
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id");
+    const { id } = await params;
     const results = await collection.find({ _id: new ObjectId(id) }).toArray();
 
     return new Response(JSON.stringify(results[0]));
