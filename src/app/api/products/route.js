@@ -29,8 +29,8 @@ export async function POST(request) {
     const { database } = await connectToDatabase();
     const collection = database.collection('products');
 
-    const { nombre, precio } = await request.json() 
-    const results = await collection.insertOne({ nombre, precio });
+    const { nombre, precio, stock, imagen_url } = await request.json() 
+    const results = await collection.insertOne({ nombre, precio, stock, imagen_url });
 
     return Response.json(results, { headers: corsHeaders });
     
